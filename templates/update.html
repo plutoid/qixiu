@@ -1,0 +1,66 @@
+
+{% extends "layout.html" %}
+{% block body %}
+
+  {% if session.logged_in %}
+    <form action="{{ url_for('set_update') }}" method=post class=add-entry>
+      <dl>
+        <dt>车牌:  <input type=text size=8 name=carid value="{{entries[0].carid}}"> 
+            车主:  <input type=text size=8 name=owner value="{{entries[0].owner }}" >
+            电话:  <input type=text size=8 name=tel value="{{entries[0].tel }}" > 
+            挂靠:  <input type=text size=8 name=corp value="{{entries[0].corp }}" >
+        <dt>一验:  <input type=text size=3 name=fst value="{{entries[0].fst }}" >
+            二验:  <input type=text size=3 name=snd value="{{entries[0].snd }}" > 
+            三验:  <input type=text size=3 name=thd value="{{entries[0].thd }}" >
+            年检:  <input type=text size=3 name=year value="{{entries[0].year }}" >
+            保险:  <input type=text size=3 name=insurance value="{{entries[0].insurance }}" >
+         <dt>
+        <dt>备注: <dd><textarea name=remarks rows=3 cols=60>{{entries[0].remarks }}</textarea>
+        <dd><input type=submit value=提交>
+      </dl>
+    </form>
+  {% endif %}
+<ul>当月记录</ul>
+  <ul>
+        <em><a href="/all">所有</a></em>
+        <em><a href="/modify">修改</a></em>
+    </ul>
+
+  <table width="100%" border="1" style="empty-cells:show; border-collapse:collapse;" >
+     <tr>
+        <th><h2>车牌</h2></th>
+        <th>车主</th>
+        <th>挂靠公司</th> 
+        <th>联系</th> 
+        <th>一验</th>
+        <th>二验</th>
+        <th>三验</th>
+        <th>年检</th>
+        <th>保险</th>
+        <th>备注</th>
+    </tr>
+
+   <ul  class=entries>
+  {% for entry in entries %}
+    <tr>
+        <th><h2>{{ entry.carid }}</h2></th>
+        <td>{{ entry.owner|safe }}  </td>
+        <td>{{ entry.corp}}</td> 
+        <td>{{ entry.tel}} </td> 
+        <td>{{ entry.fst}}</td>
+        <td>{{ entry.snd}}</td>
+        <td>{{ entry.thd}}</td>
+        <td>{{ entry.year}}</td>
+        <td>{{ entry.insurance}}</td>
+        <td>{{ entry.remarks}}</td>
+    </tr>
+  {% else %} 
+    <li><em>Nothing</em></li>
+  {% endfor %}
+  </ul>
+
+  
+
+  </table>
+
+  {% endblock %}

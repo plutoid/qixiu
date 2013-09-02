@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+  <ui>
+  {% if error %}<div class="alert alert-error">登录错误: {{ error }}</div>{% endif %}
+  <form class="well form-inline"  action="{{ url_for('login') }}" method=post>
+      <input type="text" name=username class="input-small" placeholder="用户名">
+      <input type="password" name=password class="input-small" placeholder="密码">
+      <label class="checkbox">
+        <input type="checkbox"> 记住我
+      </label>
+      <button type="submit" class="btn">登录</button>
+  </form>
+  </ui>
+
+
+{% endblock %}
+
